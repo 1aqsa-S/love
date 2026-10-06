@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Messages</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Dancing+Script:wght=700&family=Poppins:wght=300;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: #4a0e17;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0),
+                radial-gradient(rgba(255, 255, 255, 0.1) 2px, transparent 0);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            min-height: 100vh; 
+            padding: 40px 20px; 
+            color: white; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        .lock-container { background: white; color: #333; padding: 35px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); max-width: 400px; width: 100%; text-align: center; }
+        .lock-container h2 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #4a0e17; margin-bottom: 10px; }
+        .lock-container p { font-size: 0.9rem; color: #666; margin-bottom: 25px; }
+        .pin-display { font-size: 2rem; letter-spacing: 10px; margin-bottom: 20px; height: 45px; font-weight: bold; color: #4a0e17; }
+        
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 280px; margin: 0 auto 25px auto; }
+        .key { background: #f9f2f3; border: none; padding: 15px; border-radius: 50%; font-size: 1.2rem; font-weight: 600; color: #4a0e17; cursor: pointer; transition: all 0.2s; width: 60px; height: 60px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        .key:hover { background: #4a0e17; color: white; transform: scale(1.05); }
+        .key.action { background: #f0dee1; font-size: 0.9rem; border-radius: 15px; width: auto; height: auto; padding: 12px; }
+
+        #secretContent { display: none; max-width: 800px; width: 100%; flex-direction: column; align-items: center; }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); text-align: center; }
+        .subtitle { margin-bottom: 40px; opacity: 0.9; font-size: 1.2rem; text-align: center; }
+        
+        .message-container { width: 100%; display: flex; flex-direction: column; gap: 25px; margin-bottom: 40px; }
+        .message-card { background: white; color: #333; padding: 45px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); border-left: 8px solid #4a0e17; }
+        .message-text { font-size: 1.25rem; line-height: 1.8; font-style: italic; color: #222; margin-bottom: 20px; white-space: pre-line; text-align: left; }
+        
+        .together-live-timer { font-family: 'Poppins', sans-serif; font-weight: 600; font-style: normal; color: #4a0e17; background: #f9f2f3; padding: 2px 8px; border-radius: 6px; display: inline-block; margin: 0 4px; border: 1px dashed #4a0e17; font-size: 1.1rem; }
+
+        .message-footer { font-size: 1rem; color: #777; text-align: right; font-weight: 600; text-transform: uppercase; }
+        .back-btn { display: inline-block; background: white; color: #4a0e17; padding: 14px 35px; border-radius: 25px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; font-size: 1.05rem; }
+        .back-btn:hover { transform: translateY(-3px); background: #4a0e17; color: white; }
+    </style>
+</head>
+<body>
+
+    <!-- Passcode interface -->
+    <div class="lock-container" id="lockScreen">
+        <h2>Enter Passcode</h2>
+        <p>Type the secret numbers to unlock letters</p>
+        <div class="pin-display" id="pinDisplay">****</div>
+        <div class="keypad">
+            <button class="key" onclick="pressNum('1')">1</button>
+            <button class="key" onclick="pressNum('2')">2</button>
+            <button class="key" onclick="pressNum('3')">3</button>
+            <button class="key" onclick="pressNum('4')">4</button>
+            <button class="key" onclick="pressNum('5')">5</button>
+            <button class="key" onclick="pressNum('6')">6</button>
+            <button class="key" onclick="pressNum('7')">7</button>
+            <button class="key" onclick="pressNum('8')">8</button>
+            <button class="key" onclick="pressNum('9')">9</button>
+            <button class="key action" onclick="clearPin()">Clear</button>
+            <button class="key" onclick="pressNum('0')">0</button>
+            <button class="key action" onclick="checkPin()">OK</button>
+        </div>
+        <a href="index.html" style="color: #4a0e17; font-size: 0.9rem; text-decoration: none; font-weight:600;">← Cancel</a>
+    </div>
+
+    <!-- Protected Content Area -->
+    <div id="secretContent">
+        <h1>SECRET MESSAGE FOR MY BEGUM JI..🌷💌</h1>
+        <p class="subtitle">Locked letters left just for you ✉️</p>
+
+        <div class="message-container">
+            <div class="message-card">
+                <div class="message-text">"With due respect MY PRITTIEST PRINCESS..✨💖
+i want to say that here is the timer of our togetherness till now... <span id="liveCounter" class="together-live-timer">Calculating... ⏳</span> ...and i loved and cherished every single bit of it, i wish yuh to stay safe and healthy with a huge bunch blessings forever..sometimes things get messed up bcz of me and from now on i'll try make things better and way better that leads to best and all i want is your happiness with heart full of love and joy and see yuh living with no grudges and staying with me forever and may we stay understanding and loving to each other and all wishes come true removing all the distance between us and FOR SURE we'll be together soon inshallah and we'll give our best to make it FOREVER and i wish that all the happiness find its way to yuh and may yuh a beautiful and successful and charming life as much as your paari paari eyezjz got the charm...and i wish and i'll make sure to be able to make yuh happier feel loved and comfortable and prioritized over everything and make my paari shi jaan the most happiest babygirl in the whole MULTIverse...stay safe and blessed and i'll always be with yuh right by your side and inshallah we'll make this childhood love to FOREVER cuz we have potential and we'll make it till last for sure...and their will be no last or end for us ever...may all the good things happens to yuh that yuh even forget the taste of negativity and tears that made my pyaari chico to feel lonely that yuh are no more and i am always here for yuh so keep smiling and be internally geniunely happy and...whatever i say YUH ARE MY MY my LOVE LIFE YUH ARE BEST THE PERFECT ONE THE MOST ADORABLE THE MOST BEAUTIFUL AND THE ONE WITH THE PUREST HEART AND A MINI SOUL and everything will stay forever and what is gone was their time to be gone so live with the present one and seek happiness for future and always remember past with happy thoughts and happy times that were spent with our loved ones...and live happily meri paaro i love yuh and very much so your chuza is less with words but i want to make yuh much more comfy and loved as much as my existence can do...and iam proud and always with yuh so stop doubting and thinking of negatives for now and get to it for what yuh want..i'll always be your biggest applauder and supporter and just live freely so yuh can never think of undone things be happy for the done ones and YUH ARE BEST and will be forever my cutie pie...💖💞💝🤗🎀🫶🏼💕🌸💫💓✨"</div>
+                <div class="message-footer">— Note #1</div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn">← Back Home</a>
+    </div>
+
+    <script>
+        const CORRECT_PIN = "1319"; 
+        let enteredPin = "";
+        const display = document.getElementById("pinDisplay");
+        const startDate = new Date("July 23, 2026 22:06:00").getTime();
+
+        function updateLiveCounter() {
+            const now = new Date().getTime();
+            const difference = now - startDate;
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("liveCounter").innerText = `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+        }
+
+        function pressNum(num) {
+            if (enteredPin.length < 4) { enteredPin += num; updateDisplay(); }
+        }
+        function clearPin() { enteredPin = ""; updateDisplay(); }
+        function updateDisplay() {
+            let visible = "";
+            for(let i=0; i<4; i++) { visible += enteredPin[i] ? "●" : "*"; }
+            display.innerText = visible;
+        }
+
+        function checkPin() {
+            if (enteredPin === CORRECT_PIN) {
+                document.getElementById("lockScreen").style.display = "none";
+                document.getElementById("secretContent").style.display = "flex";
+                document.body.style.justifyContent = "flex-start";
+                setInterval(updateLiveCounter, 1000);
+                updateLiveCounter();
+            } else {
+                alert("Incorrect Passcode! Try again.");
+                clearPin();
+            }
+        }
+        updateDisplay();
+    </script>
+</body>
+</html>

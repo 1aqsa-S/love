@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - Smile to Proceed</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Dancing+Script:wght=700&family=Poppins:wght=300;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        /* Updated deep romantic sunset background gradient */
+        body { 
+            background: linear-gradient(135deg, #4a0e17 0%, #a83244 50%, #ff758c 100%); 
+            min-height: 100vh; 
+            color: white; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            overflow-x: hidden; 
+            position: relative;
+        }
+        
+        /* Floating background elements specifically for the story page */
+        .story-bg-heart {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.15);
+            animation: floatUp 8s linear infinite;
+            bottom: -50px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-105vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+        
+        h1 { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 4rem; 
+            margin-top: 40px; 
+            margin-bottom: 10px; 
+            text-shadow: 3px 4px 8px rgba(0, 0, 0, 0.4); 
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .subtitle { font-size: 1.1rem; opacity: 0.9; margin-bottom: 50px; text-align: center; z-index: 5; text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2); }
+
+        .timeline-container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 40px; 
+            max-width: 600px; 
+            width: 100%; 
+            padding: 0 20px; 
+            margin-bottom: 120px;
+            z-index: 5;
+        }
+
+        /* Upgraded 3D Floating Story Cards with rich maroon highlights */
+        .story-card { 
+            background: rgba(255, 255, 255, 0.96); 
+            color: #333; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3); 
+            border-left: 6px solid #4a0e17;
+            transform: translateY(40px); 
+            opacity: 0; 
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); 
+        }
+        
+        .story-card.visible { transform: translateY(0); opacity: 1; }
+
+        .chapter-num { font-weight: 600; color: #a83244; font-size: 0.85rem; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { font-family: 'Poppins', sans-serif; font-weight: 600; margin-bottom: 10px; font-size: 1.4rem; color: #4a0e17; }
+        p { font-size: 1rem; line-height: 1.7; color: #444; }
+
+        .nav-box { position: fixed; bottom: 0; background: linear-gradient(to top, rgba(74,14,23,0.95) 60%, rgba(74,14,23,0)); width: 100%; text-align: center; padding: 25px 0; z-index: 100; }
+        .back-btn { display: inline-block; background: white; color: #4a0e17; padding: 12px 35px; border-radius: 25px; font-weight: bold; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .back-btn:hover { transform: translateY(-3px); background: #4a0e17; color: white; }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Background Hearts -->
+    <div class="story-bg-heart" style="left: 10%; animation-delay: 0s;">❤️</div>
+    <div class="story-bg-heart" style="left: 25%; animation-delay: 3s;">🎀</div>
+    <div class="story-bg-heart" style="left: 45%; animation-delay: 1s;">✨</div>
+    <div class="story-bg-heart" style="left: 65%; animation-delay: 5s;">💝</div>
+    <div class="story-bg-heart" style="left: 85%; animation-delay: 2s;">💞</div>
+
+    <h1>Our Story</h1>
+    <p class="subtitle">Every silent glance leading straight to you 💫✨</p>
+
+    <div class="timeline-container">
+        <!-- Chapter 1 -->
+        <div class="story-card">
+            <span class="chapter-num">Chapter One</span>
+            <h3>The Roadside Glance 🎀</h3>
+            <p>I was just casually playing cricket out on the road when reality completely shifted. You passed right by me on a bicycle, and my eyes couldn't look away. Soon after, I spotted you again at the school right next to mine, realizing fate was dropping hints about **MY PRINCESS** from the very beginning 💝</p>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="story-card">
+            <span class="chapter-num">Chapter Two</span>
+            <h3>The Silent Exam Centers 💞</h3>
+            <p>Time went on, and our paths crossed again under the heavy silence of the board exam center. Even though our rooms were completely separate, those distant, passing moments in the hallways held everything. There were only brief glances, but that quiet eye contact was enough to drive me completely crazy for **MERA PAARA BACHW** ✨</p>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="story-card">
+            <span class="chapter-num">Chapter Three</span>
+            <h3>Two Strict Years of Silence 💫</h3>
+            <p>Destiny took a major turn when I finally got admission into your school. We spent two whole years studying in the same space, but the strict rules meant we never talked, never shared notes, and never laughed over inside jokes. Yet, the pure intensity of just being near you and catching those quiet, stolen glances only made me crazier for you, **MERI PAARI SHI JAAN** 🎀</p>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div class="story-card">
+            <span class="chapter-num">Chapter Four</span>
+            <h3>The Temporary Detour 💖</h3>
+            <p>When college started, we faced a brief detour. I made a different path and chose a separate college, keeping us physically apart for a few long months. But the distance only proved one thing—my world was completely empty without you. I quickly left that path behind and came running straight back to your college where I belonged 💝</p>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div class="story-card">
+            <span class="chapter-num">Chapter Five</span>
+            <h3>Our Locked Future Together ✨</h3>
+            <p>From those silent school hallways to the college corridors, we have proven that our connection is written in the stars. No matter where life takes us next, IN FUTURE we are going to walk hand-in-hand, holding onto this love forever and ever, till the absolute end of time 💞💫</p>
+        </div>
+    </div>
+
+    <div class="nav-box">
+        <a href="index.html" class="back-btn">← Back Home</a>
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll('.story-card');
+        
+        const checkScroll = () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if(cardTop < triggerBottom) {
+                    card.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+    </script>
+</body>
+</html>
